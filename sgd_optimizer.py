@@ -33,7 +33,6 @@ class SGD_no_momentum():
 		print('Global Minima : {} ; {}'.format(self.w[0], self.w[1]))
 
 
-
 class SGD_momentum():
 	def __init__(self, func):
 		self.w = [2.5, 1.2] #random value
@@ -70,7 +69,6 @@ class SGD_momentum():
 
 		print('Epochs : {} ; Cost : {} ; X : {} ; Y : {}'.format(epochs, J, self.w[0], self.w[1]))
 		print('Global Minima : {} ; {}'.format(self.w[0], self.w[1]))
-
 
 
 class SGD_nesterov():
