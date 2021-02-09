@@ -1,5 +1,3 @@
-import numpy as np
-
 class SGD_no_momentum():
 	def __init__(self, func):
 		self.w = [-10, -1] #random value
@@ -21,7 +19,7 @@ class SGD_no_momentum():
 		J = self.func(self.w)
 		epochs = 0
 		print(J_min, J)
-		while np.abs(J_min - J) > 1e-8:
+		while abs(J_min - J) > 1e-8:
 			if epochs != 0:
 				J_min = J
 			J = self.func(self.w)
@@ -60,7 +58,7 @@ class SGD_momentum():
 		J = self.func(self.w)
 		epochs = 0
 		print(J_min, J)
-		while np.abs(J_min - J) > 1e-7:
+		while abs(J_min - J) > 1e-7:
 			if epochs != 0:
 				J_min = J
 			J = self.func(self.w)
@@ -99,7 +97,7 @@ class SGD_nesterov():
 		J = self.func(self.w)
 		epochs = 0
 		print(J_min, J)
-		while np.abs(J_min - J) > 1e-7:
+		while abs(J_min - J) > 1e-7:
 			if epochs != 0:
 				J_min = J
 			J = self.func(self.w)
