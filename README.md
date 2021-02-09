@@ -12,3 +12,6 @@ I coded the 4 algorithms studied, that is to say :
 The optimizers therefore try to find a global minimum, and thus avoid falling into a local minimum.  
 The function studied is the Beale function.  
 (The optimizers can change the global minimat, depending on their initialization position (because the global minimat is not really precise on this function)).
+
+You can adapt these optimizers to your needs by modifying the function and derivatives.  
+You can also change the hyperparameters: e (or n), epsilon, beta, etc...
