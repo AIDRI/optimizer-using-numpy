@@ -1,5 +1,5 @@
 class Adam():
-	def __init__(self, func, partial_derivative):
+	def __init__(self, func, derivative):
 		self.w = [2.5, 1.2] #random value
 		self.mean = [0, 0]
 		self.variance = [0, 0]
@@ -8,7 +8,7 @@ class Adam():
 		self.n = 0.001
 		self.e = 1e-7
 		self.func = func
-		self.partial_derivative = partial_derivative
+		self.derivative = derivative
 
 	def theta_update(self, grads):
 		self.mean[0] = (1 - 0.9) * grads[0] + 0.9 * self.mean[0]
@@ -35,7 +35,7 @@ class Adam():
 			if epochs != 0:
 				J_min = J
 			J = self.func(self.w)
-			self.grad = self.partial_derivative(self.w)
+			self.grad = self.derivative(self.w)
 			self.theta_update(self.grad)
 			epochs += 1
 			if epochs%500==0:
