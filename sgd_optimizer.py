@@ -1,14 +1,9 @@
 class SGD_no_momentum():
-	def __init__(self, func):
+	def __init__(self, func, partial_derivative):
 		self.w = [-10, -1] #random value
 		self.e = 0.0005
 		self.func = func
-
-	def partial_derivative(self, w):
-		x, y = w[0], w[1]
-		dx = 2. * ( (1.5 - x + x * y) * (y - 1) + (2.25 - x + x * y**2) * (y**2 - 1) + (2.625 - x + x * y**3) * (y**3 - 1) )
-		dy = 2. * ( (1.5 - x + x * y) * x + (2.25 - x + x * y**2) * 2. * x * y + (2.625 - x + x * y**3) * 3. * x * y**2 )
-		return [dx, dy]
+		self.partial_derivative = partial_derivative
 
 	def theta_update(self, w):
 		self.w[0] -= self.e * self.grad[0]
@@ -34,17 +29,12 @@ class SGD_no_momentum():
 
 
 class SGD_momentum():
-	def __init__(self, func):
+	def __init__(self, func, partial_derivative):
 		self.w = [2.5, 1.2] #random value
 		self.v = [0, 0]
 		self.e = 0.0001
 		self.func = func
-
-	def partial_derivative(self, w):
-		x, y = w[0], w[1]
-		dx = 2. * ( (1.5 - x + x * y) * (y - 1) + (2.25 - x + x * y**2) * (y**2 - 1) + (2.625 - x + x * y**3) * (y**3 - 1) )
-		dy = 2. * ( (1.5 - x + x * y) * x + (2.25 - x + x * y**2) * 2. * x * y + (2.625 - x + x * y**3) * 3. * x * y**2 )
-		return np.array([dx, dy])
+		self.partial_derivative = partial_derivative
 
 	def theta_update(self, grads):
 		self.v[0] = 0.9 * self.v[0] - self.e * grads[0]
@@ -57,7 +47,7 @@ class SGD_momentum():
 		J = self.func(self.w)
 		epochs = 0
 		print(J_min, J)
-		while abs(J_min - J) > 1e-7:
+		while abs(J_min - J) > 1e-8:
 			if epochs != 0:
 				J_min = J
 			J = self.func(self.w)
@@ -72,17 +62,12 @@ class SGD_momentum():
 
 
 class SGD_nesterov():
-	def __init__(self, func):
+	def __init__(self, func, partial_derivative):
 		self.w = [2.5, 1.2] #random value
 		self.v = [0, 0]
 		self.e = 0.0001
 		self.func = func
-
-	def partial_derivative(self, w):
-		x, y = w[0], w[1]
-		dx = 2. * ( (1.5 - x + x * y) * (y - 1) + (2.25 - x + x * y**2) * (y**2 - 1) + (2.625 - x + x * y**3) * (y**3 - 1) )
-		dy = 2. * ( (1.5 - x + x * y) * x + (2.25 - x + x * y**2) * 2. * x * y + (2.625 - x + x * y**3) * 3. * x * y**2 )
-		return np.array([dx, dy])
+		self.partial_derivative = partial_derivative
 
 	def theta_update(self, grads):
 		self.v[0] = 0.9 * self.v[0] - self.e * grads[0]
@@ -95,7 +80,7 @@ class SGD_nesterov():
 		J = self.func(self.w)
 		epochs = 0
 		print(J_min, J)
-		while abs(J_min - J) > 1e-7:
+		while abs(J_min - J) > 1e-8:
 			if epochs != 0:
 				J_min = J
 			J = self.func(self.w)
