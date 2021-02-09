@@ -1,9 +1,9 @@
 class SGD_no_momentum():
-	def __init__(self, func, derivative):
+	def __init__(self, func, partial_derivative):
 		self.w = [-10, -1] #random value
 		self.e = 0.0005
 		self.func = func
-		self.derivative = derivative
+		self.partial_derivative = partial_derivative
 
 	def theta_update(self, w):
 		self.w[0] -= self.e * self.grad[0]
@@ -18,7 +18,7 @@ class SGD_no_momentum():
 			if epochs != 0:
 				J_min = J
 			J = self.func(self.w)
-			self.grad = self.derivative(self.w)
+			self.grad = self.partial_derivative(self.w)
 			self.theta_update(self.grad)
 			epochs += 1
 			if epochs%10==0:
@@ -29,12 +29,12 @@ class SGD_no_momentum():
 
 
 class SGD_momentum():
-	def __init__(self, func, derivative):
+	def __init__(self, func, partial_derivative):
 		self.w = [2.5, 1.2] #random value
 		self.v = [0, 0]
 		self.e = 0.0001
 		self.func = func
-		self.derivative = derivative
+		self.partial_derivative = partial_derivative
 
 	def theta_update(self, grads):
 		self.v[0] = 0.9 * self.v[0] - self.e * grads[0]
@@ -51,7 +51,7 @@ class SGD_momentum():
 			if epochs != 0:
 				J_min = J
 			J = self.func(self.w)
-			self.grad = self.derivative(self.w)
+			self.grad = self.partial_derivative(self.w)
 			self.theta_update(self.grad)
 			epochs += 1
 			if epochs%500==0:
@@ -62,12 +62,12 @@ class SGD_momentum():
 
 
 class SGD_nesterov():
-	def __init__(self, func, derivative):
+	def __init__(self, func, partial_derivative):
 		self.w = [2.5, 1.2] #random value
 		self.v = [0, 0]
 		self.e = 0.0001
 		self.func = func
-		self.derivative = derivative
+		self.partial_derivative = partial_derivative
 
 	def theta_update(self, grads):
 		self.v[0] = 0.9 * self.v[0] - self.e * grads[0]
@@ -87,7 +87,7 @@ class SGD_nesterov():
 			X_ = self.w[0] + 0.9 * self.v[0]
 			Y_ = self.w[1] + 0.9 * self.v[1]
 			W_ = [X_, Y_]
-			self.grad = self.derivative(W_)
+			self.grad = self.partial_derivative(W_)
 			self.theta_update(self.grad)
 			epochs += 1
 			if epochs%500==0:
